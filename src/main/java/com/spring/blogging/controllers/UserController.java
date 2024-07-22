@@ -1,7 +1,6 @@
 package com.spring.blogging.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +25,7 @@ import com.spring.blogging.services.UserService;
 public class UserController {
      
     @Autowired
-	private UserService userService; //proxy class
+	private UserService userService; // class
 
 	//POST -- create user-------
         @PostMapping("/")
@@ -59,7 +57,7 @@ public class UserController {
     		return ResponseEntity.ok(this.userService.getAllUsers());
     	}
         
-    //GET ---- user single
+    //GET ---- user single -------
         @GetMapping("/{userId}")
         public ResponseEntity<UserDto> getSingleUsers(@PathVariable Integer userId)
     	{
