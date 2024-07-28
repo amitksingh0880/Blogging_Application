@@ -1,5 +1,4 @@
-package com.spring.blogging.services.impl;
-
+package com.spring.blogging.services.implementation;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = this.dtoToUser(userDto);
-        user.setId(null);
+//        user.setId(null);
         User savedUser = this.userRepo.save(user);
         return this.userToDto(savedUser);
     }
@@ -73,6 +72,7 @@ public class UserServiceImpl implements UserService {
 
         //Using ModelMapper ----
         User user = this.modelMapper.map(userDto,User.class);
+        user.setId(null);
         return user;
     }
 
@@ -85,7 +85,6 @@ public class UserServiceImpl implements UserService {
 //        userDto.setName(user.getName());
 //        userDto.setPassword(user.getPassword());
 
-        UserDto userDto = this.modelMapper.map(user , UserDto.class);
-        return userDto;
+        return this.modelMapper.map(user , UserDto.class);  //Instead of above implementation MODELMAPPER is used.
     }
 }
