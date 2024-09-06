@@ -1,24 +1,32 @@
 package com.spring.blogging.basicSecurity;
 
+import com.spring.blogging.entities.User;
+import com.spring.blogging.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Your logic to load user from database or other source
-        // For example:
-        // User user = userRepository.findByUsername(username);
-        // if (user == null) {
-        //     throw new UsernameNotFoundException("User not found");
-        // }
-        // return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+    @Autowired
+    private UserRepo userRepo;
 
-        // This is just a placeholder
-        return null; // Replace with actual user details
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        // Fetch user from database using email
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+        // Return UserDetails object
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),    // Assuming the email is used as the username
+                user.getPassword(),
+                Collections.emptyList() // Add authorities/roles here if needed
+        );
     }
 }

@@ -11,9 +11,12 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        // You can log the exception for debugging purposes if needed
+        System.out.println("Unauthorized error: " + authException.getMessage());
 
-         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "InValid User!");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid User!");
     }
 }

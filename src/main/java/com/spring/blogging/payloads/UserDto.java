@@ -10,20 +10,20 @@ import lombok.Setter;
 @Setter
 public class UserDto {
 
-	private int id; // Changed from Id to id for consistency with naming conventions
+	private int id;
 
-	@NotNull
+	@NotNull(message = "Name cannot be null")
 	private String name;
 
-	@Email(message = "Email is inValid !")
+	@Email(message = "Email is invalid")
 	private String email;
 
-	@NotEmpty
-	@Size(min = 3 , max = 10 ,message = "Password must be of min 3 and max 10 characters !")
+	@NotEmpty(message = "Password cannot be empty")
+	@Size(min = 3, max = 10, message = "Password must be between 3 and 10 characters")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,12}$",
-			message = "password must be min 4 and max 12 length containing atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
+			message = "Password must be between 4 and 12 characters, with at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character")
 	private String password;
 
-	@NotEmpty
+	@NotEmpty(message = "About field cannot be empty")
 	private String about;
 }
