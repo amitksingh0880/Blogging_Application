@@ -34,4 +34,9 @@ public class globalExceptionhandler {
 		 });
 		return new ResponseEntity<Map<String , String>>(response , HttpStatus.BAD_REQUEST);
 	}
+
+	@ExceptionHandler(PostNotFoundException.class)
+	public ResponseEntity<String> handlePostNotFoundException(PostNotFoundException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	}
 }

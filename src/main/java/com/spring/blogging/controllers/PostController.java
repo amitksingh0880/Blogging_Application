@@ -2,6 +2,8 @@ package com.spring.blogging.controllers;
 
 import com.spring.blogging.config.AppConstants;
 import com.spring.blogging.entities.Post;
+import com.spring.blogging.exceptions.PostNotFoundException;
+import com.spring.blogging.exceptions.ResourceNotFoundException;
 import com.spring.blogging.payloads.ApiResponse;
 import com.spring.blogging.payloads.PostDto;
 import com.spring.blogging.payloads.PostResponse;
@@ -64,6 +66,9 @@ public class PostController {
                                                       @RequestParam(value = "Order",defaultValue = AppConstants.ORDER , required = false) String order)
       {
           PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize,sortBy ,order);
+          if (postResponse == null) {
+              throw new PostNotFoundException("No posts found");
+          }
           return new ResponseEntity<>(postResponse , HttpStatus.OK);
       }
 

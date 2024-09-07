@@ -21,7 +21,7 @@ public class RegisterUserDto {
     private String password;
 
     @NotEmpty(message = "Full name cannot be empty")
-    private String fullName;
+    private String name;
 
     @NotEmpty(message = "Location cannot be empty")
     private String location;
